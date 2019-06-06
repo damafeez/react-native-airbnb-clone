@@ -7,28 +7,73 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import {createBottomTabNavigator} from 'react-navigation';
+import Feather from 'react-native-vector-icons/Feather'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import Explore from './screens/Explore';
+import Inbox from './screens/Inbox';
+import Profile from './screens/Profile';
+import Saved from './screens/Saved';
+import Trips from './screens/Trips';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-type Props = {};
-export default class App extends Component<Props> {
+class App extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to React Native!</Text>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
       </View>
     );
   }
 }
 
+export default createBottomTabNavigator({
+  Explore: {
+    screen: Explore,
+    navigationOptions: {
+      tabBarLabel: "EXPLORE",
+      tabBarIcon: ({tintColor}) => (<Feather name="search" color={tintColor} size={22} />)
+    }
+  },
+  Saved: {
+    screen: Saved,
+    navigationOptions: {
+      tabBarLabel: "SAVED",
+      tabBarIcon: ({tintColor}) => (<Feather name="heart" color={tintColor} size={22} />)
+    }
+  },
+  Trips: {
+    screen: Trips,
+    navigationOptions: {
+      tabBarLabel: "TRIPS",
+      tabBarIcon: ({tintColor}) => (<FontAwesome name="tripadvisor" color={tintColor} size={22} />)
+    }
+  },
+  Inbox: {
+    screen: Inbox,
+    navigationOptions: {
+      tabBarLabel: "INBOX",
+      tabBarIcon: ({tintColor}) => (<Feather name="message-square" color={tintColor} size={22} />)
+    }
+  },
+  Profile: {
+    screen: Profile,
+    navigationOptions: {
+      tabBarLabel: "PROFILE",
+      tabBarIcon: ({tintColor}) => (<Feather name="user" color={tintColor} size={22} />)
+    }
+  },
+},
+{
+  tabBarOptions: {
+    activeTintColor: 'red',
+    inactiveTintColor: 'grey',
+    style: {
+      backgroundColor: 'white',
+    }
+  }
+})
 const styles = StyleSheet.create({
   container: {
     flex: 1,
